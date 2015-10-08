@@ -3,17 +3,44 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.javahonk</groupId>
 	<artifactId>GenerateMavenBuildNumber</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${version}</version>
 	<name>GenerateMavenBuildNumber</name>
 
-	<dependencies>
+	<properties>
+		<version>1.0</version>
+	</properties>
 
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-		</dependency>
+	<build>
+		<finalName>${project.artifactId}-${project.version}_${buildNumber}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<doCheck>false</doCheck>
+					<doUpdate>false</doUpdate>
+					<revisionOnScmFailure>true</revisionOnScmFailure>
+					<format>{0,date,yyyy-MM-dd_HH-mm}_{1}</format>
+					<items>
+						<item>timestamp</item>
+						<item>${user.name}</item>
+					</items>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
-	</dependencies>
+	<scm>
+		<connection>scm:git:git://github.com/javahonk/GenerateMavenBuildNumber.git</connection>
+	</scm>
 
 </project>

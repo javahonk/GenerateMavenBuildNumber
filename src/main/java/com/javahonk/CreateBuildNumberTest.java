@@ -4,6 +4,7 @@ public class CreateBuildNumberTest {
 
 	public static void main(String[] args) {
 		System.out.println("Build number test");
+		System.out.println("Build number test");
 
 	}
 
